@@ -55,9 +55,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let dadosSimulacao = null;
 
     // Envio do formulário
+<<<<<<< HEAD
     document.getElementById('formSimulador').addEventListener('submit', function(e) {
         e.preventDefault();
         
+=======
+    /**
+     * Handles the submission of the loan simulator form and performs the loan calculation.
+     * This function is triggered when the user submits the form with the loan details.
+     * It validates the required fields, collects the form data, sends it to the backend for calculation,
+     * and then displays the results of the simulation.
+     */
+    document.getElementById('formSimulador').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validação dos campos obrigatórios
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         const camposObrigatorios = ['dataLiberacao', 'dataPrimeiraParcela', 'valorSolicitado', 'taxaJuros', 'qtdParcelas'];
         for (const campo of camposObrigatorios) {
             if (!document.getElementById(campo).value) {
@@ -85,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
             incrementoTaxa: simularMaisParcelas ? document.getElementById('incrementoTaxa').value : '0,00'
         };
 
+<<<<<<< HEAD
+=======
+        console.log('Dados enviados para simulação:', dados);  // ADICIONE AQUI
+
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         fetch('/calcular', {
             method: 'POST',
             headers: {
@@ -94,12 +112,20 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
+<<<<<<< HEAD
             console.log('Resposta completa do backend:', data);
             console.log('Data.data:', data.data);
             console.log('Simulações:', data.data?.simulacoes);
         
             if (data.status === 'success') {
                 dadosSimulacao = data.data;
+=======
+            console.log('Resposta completa do backend:', data);  // ADICIONE AQUI
+            console.log('Data.data:', data.data);  // ADICIONE AQUI
+            console.log('Simulações:', data.data?.simulacoes);  // ADICIONE AQUI
+            if (data.status === 'success') {
+                dadosSimulacao = data.data; // Armazena os dados para exportação
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
                 mostrarResultados(data.data);
             } else {
                 alert('Erro ao calcular: ' + data.message);
@@ -109,12 +135,19 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Erro:', error);
             alert('Erro ao processar a requisição');
         });
+<<<<<<< HEAD
         
+=======
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
     });
 
     function mostrarResultados(dados) {
         const resultadosDiv = document.getElementById('resultados');
         
+<<<<<<< HEAD
+=======
+        // Função auxiliar para formatar valores
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         const formatarValor = (valor) => {
             return valor ? valor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0,00';
         };
@@ -156,6 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>`;
     
         if (dados.simulacoes && dados.simulacoes.length > 0) {
+<<<<<<< HEAD
             localStorage.setItem('ultimaSimulacao', JSON.stringify(dados));
             
             html += `
@@ -173,11 +207,27 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </tr>
                             </thead>
                             <tbody>`;
+=======
+            html += `
+                <div class="mb-4">
+                    <h5>Simulações em Outras Parcelas</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Parcelas</th>
+                                <th>Taxa</th>
+                                <th>Valor Parcela</th>
+                                <th>Total Juros</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
             
             dados.simulacoes.forEach(simulacao => {
                 html += `
                     <tr>
                         <td>${simulacao.qtd_parcelas}x</td>
+<<<<<<< HEAD
                         <td>${formatarValor(simulacao.taxa_juros)}</td>
                         <td>R$ ${formatarValor(simulacao.valor_parcela)}</td>
                         <td>R$ ${formatarValor(simulacao.total_juros)}</td>
@@ -192,6 +242,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button type="button" class="btn btn-secondary mt-3" onclick="exportarSimulacoesAdicionais()">
                         Exportar Simulações
                     </button>
+=======
+                        <td>${simulacao.taxa_juros}%</td>
+                        <td>R$ ${formatarValor(simulacao.valor_parcela)}</td>
+                        <td>R$ ${formatarValor(simulacao.total_juros)}</td>
+                    </tr>`;
+            });
+    
+            html += `
+                        </tbody>
+                    </table>
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
                 </div>`;
         }
     
@@ -228,6 +289,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
         resultadosDiv.innerHTML = html;
     }
+<<<<<<< HEAD
+=======
+    
+    
+    
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
 
     window.exportarParaExcel = function() {
         if (!dadosSimulacao) {
@@ -235,16 +302,31 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
     
+<<<<<<< HEAD
+=======
+        // Função auxiliar para formatar números no padrão brasileiro
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         const formatarNumero = (numero) => {
             return numero.toFixed(2).replace('.', ',');
         };
         
+<<<<<<< HEAD
         let csvContent = 'Parcela;Data;Valor Parcela;Amortização;Juros;Saldo Devedor\n';
         
+=======
+        // Cria o cabeçalho do CSV
+        let csvContent = 'Parcela;Data;Valor Parcela;Amortização;Juros;Saldo Devedor\n';
+        
+        // Adiciona os dados de cada parcela
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         dadosSimulacao.fluxo.forEach(parcela => {
             csvContent += `${parcela.parcela};${parcela.data};${formatarNumero(dadosSimulacao.prestacao)};${formatarNumero(parcela.amortizacao)};${formatarNumero(parcela.juros)};${formatarNumero(parcela.saldo_devedor)}\n`;
         });
     
+<<<<<<< HEAD
+=======
+        // Cria o blob e faz o download
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -254,6 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
         a.click();
         window.URL.revokeObjectURL(url);
     };
+<<<<<<< HEAD
 });
 
 // Nova função para exportar simulações adicionais
@@ -283,3 +366,7 @@ window.exportarSimulacoesAdicionais = function() {
     a.click();
     window.URL.revokeObjectURL(url);
 };
+=======
+    
+});
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418

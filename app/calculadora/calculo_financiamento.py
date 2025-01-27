@@ -7,7 +7,10 @@ from decimal import Decimal
 class CalculadoraFinanciamento:
     def __init__(self, valor_solicitado, taxa_cadastro, seguro, data_liberacao, data_primeira_parcela, qtd_parcelas, taxa_juros):
         self.valor_solicitado = valor_solicitado
+<<<<<<< HEAD
         self.valor_solicitado_original = valor_solicitado
+=======
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         self.taxa_cadastro = taxa_cadastro
         self.seguro = seguro
         self.data_liberacao = datetime.strptime(data_liberacao, '%d/%m/%Y')
@@ -160,7 +163,11 @@ class CalculadoraFinanciamento:
         iof = self.calcular_iof()
         return valor_financiado_provisorio + iof['iof_total']
 
+<<<<<<< HEAD
     def calcular(self, simular_mais_parcelas=False, incremento_taxa=0):
+=======
+    def calcular(self):
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
         # Primeiro cálculo para encontrar o IOF
         valor_financiado_provisorio = self.calcular_valor_financiado_provisorio()
         dias = self.calcular_dias()
@@ -172,11 +179,17 @@ class CalculadoraFinanciamento:
         fluxo_final = self.calcular_fluxo_pagamentos(valor_financiado_final)
         prestacao_final = self.calcular_prestacao(valor_financiado_final)
         
+<<<<<<< HEAD
         resultado = {
             'valor_financiado': float(valor_financiado_final),
             'prestacao': float(prestacao_final),
             'taxa_juros': float(self.taxa_juros),  # Adicionando taxa de juros original
             'total_juros': sum(float(dados['juros']) for dados in fluxo_final),  # Adicionando total de juros
+=======
+        return {
+            'valor_financiado': float(valor_financiado_final),
+            'prestacao': float(prestacao_final),
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
             'fluxo': [
                 {
                     'parcela': i + 1,
@@ -190,6 +203,7 @@ class CalculadoraFinanciamento:
             'iof': iof
         }
 
+<<<<<<< HEAD
         if simular_mais_parcelas:
             parcelas_adicionais = [24, 36, 48, 60]
             resultado['simulacoes'] = self.calcular_simulacoes_adicionais(incremento_taxa, parcelas_adicionais)
@@ -242,3 +256,5 @@ class CalculadoraFinanciamento:
             taxa_atual += incremento_taxa
         
         return simulacoes
+=======
+>>>>>>> d4891affea258b1df5848f70a13ef7c2a3b58418
